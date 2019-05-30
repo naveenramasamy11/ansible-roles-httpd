@@ -1,0 +1,4 @@
+---
+# handlers file for httpd
+- name: start apache
+  service: name=httpd state=started enabled=yes

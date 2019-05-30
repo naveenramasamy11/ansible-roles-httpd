@@ -1,0 +1,10 @@
+---
+# tasks file for httpd
+- name: install httpd
+  package: name=httpd state=installed 
+
+- name: copy a conf file
+  copy:
+    src: httpd.conf
+    dest: /etc/httpd/conf/httpd.conf
+  notify: start apache
