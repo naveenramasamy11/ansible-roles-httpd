@@ -11,6 +11,6 @@
 
 - name: Sample Page
   copy:
-    content: "This is from SSM"
+    content: "<h1> This is from SSM </h1>"
     dest: /var/www/html/index.html
     
