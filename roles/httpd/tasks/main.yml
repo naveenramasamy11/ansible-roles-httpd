@@ -8,3 +8,9 @@
     src: httpd.conf
     dest: /etc/httpd/conf/httpd.conf
   notify: start apache
+
+- name: Sample Page
+  copy:
+    content: "This is from SSM"
+    dest: /var/www/html/index.html
+    
