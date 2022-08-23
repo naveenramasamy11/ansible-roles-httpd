@@ -11,6 +11,6 @@
 
 - name: Sample Page
   copy:
-    content: "<h1> This is from SSM </h1>"
+    content: "<h1> This is from SSM using Ansible Controller from a Dynamic Inventory </h1>"
     dest: /var/www/html/index.html
     
