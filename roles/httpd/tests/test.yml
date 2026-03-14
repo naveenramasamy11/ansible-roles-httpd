@@ -1,5 +1,6 @@
 ---
-- hosts: localhost
-  remote_user: root
+- name: Test httpd role
+  hosts: localhost
+  become: yes
   roles:
     - httpd
