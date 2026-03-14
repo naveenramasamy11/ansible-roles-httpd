@@ -1,4 +1,7 @@
 ---
 # handlers file for httpd
-- name: start apache
-  service: name=httpd state=started enabled=yes
+
+- name: restart apache
+  ansible.builtin.service:
+    name: "{{ httpd_service }}"
+    state: restarted
