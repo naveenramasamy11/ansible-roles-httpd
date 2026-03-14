@@ -1,2 +1,9 @@
 ---
 # defaults file for httpd
+
+httpd_package: httpd
+httpd_service: httpd
+httpd_document_root: /var/www/html
+httpd_port: 80
+httpd_conf_src: httpd.conf
+httpd_conf_dest: /etc/httpd/conf/httpd.conf
