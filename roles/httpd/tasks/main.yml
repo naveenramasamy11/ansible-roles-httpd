@@ -1,16 +1,44 @@
 ---
 # tasks file for httpd
-- name: install httpd
-  package: name=httpd state=installed 
 
-- name: copy a conf file
-  copy:
+- name: Install Apache HTTPD
+  ansible.builtin.package:
+    name: "{{ httpd_package }}"
+    state: present
+  tags: install
+
+- name: Deploy Apache configuration
+  ansible.builtin.copy:
     src: httpd.conf
     dest: /etc/httpd/conf/httpd.conf
-  notify: start apache
+    owner: root
+    group: root
+    mode: "0644"
+    validate: /usr/sbin/httpd -t -f %s
+  notify: restart apache
+  tags: configure
 
-- name: Sample Page
-  copy:
-    content: "<h1> This is maintained by Ansible Controller using Dynamic Inventory </h1>"
-    dest: /var/www/html/index.html
-    
+- name: Deploy default index page
+  ansible.builtin.copy:
+    content: "<h1>This is maintained by Ansible</h1>\n"
+    dest: "{{ httpd_document_root }}/index.html"
+    owner: apache
+    group: apache
+    mode: "0644"
+  tags: configure
+
+- name: Ensure Apache is started and enabled
+  ansible.builtin.service:
+    name: "{{ httpd_service }}"
+    state: started
+    enabled: yes
+  tags: service
+
+- name: Open HTTP port in firewalld
+  ansible.posix.firewalld:
+    service: http
+    permanent: yes
+    state: enabled
+    immediate: yes
+  when: ansible_facts.services["firewalld.service"] is defined
+  tags: firewall
