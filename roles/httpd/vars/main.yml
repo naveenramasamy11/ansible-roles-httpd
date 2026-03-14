@@ -1,2 +1,7 @@
 ---
 # vars file for httpd
+# Override defaults here if needed for specific environments.
+# These take higher precedence than defaults/main.yml.
+
+# Example:
+# httpd_port: 8080
