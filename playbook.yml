@@ -1,5 +1,6 @@
 ---
-- name: run this role
+- name: Install and configure Apache HTTPD
   hosts: Dev
+  become: yes
   roles:
-  - httpd
+    - httpd
